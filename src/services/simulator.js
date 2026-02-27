@@ -4,10 +4,13 @@
 function rand(min, max){ return Math.random()*(max-min)+min }
 
 const sensorsTemplate = [
-  { sensorId: 'SENS_001', fieldName: 'Field A - North', location:{lat:16.5062, lon:80.6480} },
-  { sensorId: 'SENS_002', fieldName: 'Field A - South', location:{lat:16.5050, lon:80.6460} },
-  { sensorId: 'SENS_003', fieldName: 'Field B - East', location:{lat:16.5020, lon:80.6500} },
-  { sensorId: 'SENS_004', fieldName: 'Field C - West', location:{lat:16.5085, lon:80.6420} }
+  // Cluster sensors around a green garden area near VR Siddhartha Engineering College
+  // Approx campus center: 16.5175, 80.6325 (Kanuru, Vijayawada 520007)
+  // Offsets are small so markers cluster visually on the garden area
+  { sensorId: 'SENS_001', fieldName: 'FIELD A- North', location: { lat: 16.5190, lon: 80.6330 } },
+  { sensorId: 'SENS_002', fieldName: 'FIELD B - South', location: { lat: 16.5160, lon: 80.6320 } },
+  { sensorId: 'SENS_003', fieldName: 'FIELD C - East',  location: { lat: 16.5178, lon: 80.6340 } },
+  { sensorId: 'SENS_004', fieldName: 'FIELD D - West',  location: { lat: 16.5172, lon: 80.6310 } }
 ]
 
 // generate initial time-series for last 30 days, per 15-min interval (but we'll sample fewer points to keep data small)
@@ -53,9 +56,10 @@ function tick(){
     const date = new Date()
     const hour = date.getUTCHours()
     const diurnal = 20 + 10*Math.sin((hour/24)*2*Math.PI)
-    const moisture = Math.max(12, Math.min(88, prev.soilMoisture + (Math.random()-0.5)*2 - (diurnal-24)/100))
-    const temp = Math.max(8, Math.min(42, prev.temperature + (Math.random()-0.5)*0.8))
-    const humidity = Math.max(20, Math.min(98, prev.humidity + (Math.random()-0.5)*1.5))
+    // apply only small incremental changes so readings evolve slowly (small steps)
+    const moisture = Math.max(12, Math.min(88, prev.soilMoisture + (Math.random()-0.5)*0.4 - (diurnal-24)/100))
+    const temp = Math.max(8, Math.min(42, prev.temperature + (Math.random()-0.5)*0.2))
+    const humidity = Math.max(20, Math.min(98, prev.humidity + (Math.random()-0.5)*0.5))
     const status = moisture < 25 ? 'critical' : (moisture < 40 ? 'low' : (moisture > 70 ? 'high' : 'optimal'))
     const reading = { sensorId: id, fieldName: prev.fieldName, location: prev.location, soilMoisture: Number(moisture.toFixed(1)), temperature: Number(temp.toFixed(1)), humidity: Number(humidity.toFixed(1)), timestamp: new Date().toISOString(), status }
     current[id] = reading
@@ -68,8 +72,8 @@ function tick(){
   subscribers.forEach(fn => fn(Object.values(current)))
 }
 
-// start ticking every 30 seconds
-const TICK_INTERVAL = 30000
+  // start ticking every 5 minutes (user requested small periodic changes)
+  const TICK_INTERVAL = 5 * 60 * 1000 // 5 minutes
 let intervalId = null
 
 export default {
@@ -107,14 +111,14 @@ export default {
   },
   getSatelliteMock({sat='Sentinel-2', date=null}){
     // returns metadata and a tiny svg string we can render inline
-    const ndviMean = Number((45 + Math.random()*30).toFixed(1))
+    const ndwiMean = Number((45 + Math.random()*30).toFixed(1))
     const moistureEst = Number((30 + Math.random()*30).toFixed(1))
-    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='100%' height='100%' fill='${sat.includes('1')? '#b2dfdb':'#c8e6c9'}'/><text x='20' y='40' font-size='18' fill='#2C3E50'>${sat} — ${date||new Date().toISOString().slice(0,10)}</text><text x='20' y='70' font-size='14' fill='#2C3E50'>NDVI mean: ${ndviMean}%</text><text x='20' y='94' font-size='14' fill='#2C3E50'>Soil moisture est: ${moistureEst}%</text></svg>`
-    return { satellite: sat, date: date||new Date().toISOString().slice(0,10), ndviMean, moistureEst, svg }
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='100%' height='100%' fill='${sat.includes('1')? '#b2dfdb':'#c8e6c9'}'/><text x='20' y='40' font-size='18' fill='#2C3E50'>${sat} — ${date||new Date().toISOString().slice(0,10)}</text><text x='20' y='70' font-size='14' fill='#2C3E50'>NDWI mean: ${ndwiMean}%</text><text x='20' y='94' font-size='14' fill='#2C3E50'>Soil moisture est: ${moistureEst}%</text></svg>`
+    return { satellite: sat, date: date||new Date().toISOString().slice(0,10), ndwiMean, moistureEst, svg }
   },
   // ML validation mock
   getMLValidation(){
-    const satellites = ['Sentinel-1','Sentinel-2','Landsat-8']
+    const satellites = ['Sentinel-1','Sentinel-2','ERA5']
     return satellites.map(sat => ({
       satellite: sat,
       rmse: Number((3 + Math.random()*4).toFixed(2)),

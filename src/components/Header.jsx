@@ -21,10 +21,18 @@ export default function Header(){
     <header className="header">
       <div className="inner" style={{maxWidth:1200, margin:'0 auto'}}>
         <div className="logo">
-          <div className="mark">SS</div>
+          {/* replace the blue "SS" block with your college logo */}
+          <div className="mark" style={{padding:2}}>
+            {/* replace the src below with the actual logo file you have attached */}
+            <img
+              src="/assets/college-logo.png"
+              alt="College logo"
+              style={{width:'100%',height:'100%',objectFit:'contain',borderRadius:6}}
+            />
+          </div>
           <div>
             <div style={{fontWeight:700}}>SoilSense</div>
-            <div style={{fontSize:12,opacity:0.9}}>Precision Agriculture Demo</div>
+            <div style={{fontSize:12,opacity:0.9}}>Precision Agriculture — Velagapudi Ramakrishna Siddhartha Engineering College</div>
           </div>
         </div>
         <nav className="nav-links">

@@ -6,7 +6,7 @@ export default function About(){
       <h2>About SoilSense</h2>
       <div className="card">
         <p><strong>Objective:</strong> Demonstrate integrated IoT and satellite-driven precision irrigation with ML validation.</p>
-        <p><strong>Team:</strong> Jane Doe (Lead), John Smith (Data Scientist), Research Affiliate (University)</p>
+        <p><strong>Team:</strong> </p>
         <h4>Contact</h4>
         <form onSubmit={e=>{e.preventDefault(); alert('Contact submitted (demo only)')}}>
           <div style={{display:'grid',gap:8}}>
@@ -19,8 +19,6 @@ export default function About(){
       </div>
 
       <div className="card" style={{marginTop:12}}>
-        <h4>Publications</h4>
-        <p>No publications in this demo. In a real project, link technical reports and papers here.</p>
       </div>
     </div>
   )

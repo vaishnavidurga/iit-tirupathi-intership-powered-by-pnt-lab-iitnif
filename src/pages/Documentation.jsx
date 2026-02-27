@@ -28,7 +28,7 @@ export default function Documentation(){
         <h4>ML methodology</h4>
         <ol>
           <li>Preprocess satellite bands and apply atmospheric correction</li>
-          <li>Extract features: NDVI, backscatter, surface temp</li>
+          <li>Extract features: NDWI, backscatter, surface temp</li>
           <li>Train regression models vs ground truth sensors</li>
           <li>Validate with cross-validation and compute R²/RMSE/MAE</li>
         </ol>
@@ -38,7 +38,7 @@ export default function Documentation(){
         <h4>Production integration notes</h4>
         <p>The demo uses an in-browser simulator. For production, integrate real telemetry and satellite tiles as follows:</p>
         <h5>Telemetry (MQTT / WebSocket)</h5>
-        <p>Recommended pattern: sensors -> edge gateway (LoRaWAN/MQTT) -> broker (e.g. EMQX, Mosquitto) -> bridge to cloud WebSocket or REST. Below is a simple WebSocket consumer pattern:</p>
+        <p>Recommended pattern: sensors → edge gateway (LoRaWAN/MQTT) → broker (e.g. EMQX, Mosquitto) → bridge to cloud WebSocket or REST. Below is a simple WebSocket consumer pattern:</p>
         <pre style={{background:'#f3f4f6',padding:8,borderRadius:6,overflow:'auto'}}>{`// Example (browser)
 const ws = new WebSocket('wss://your-broker.example/ws');
 ws.onmessage = (ev) => { const msg = JSON.parse(ev.data); /* update UI */ }

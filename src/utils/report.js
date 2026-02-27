@@ -1,7 +1,10 @@
-import { jsPDF } from 'jspdf'
-
 // Generate a validation PDF report from ML validation results
-export function generateValidationPDF(results){
+// jsPDF is imported lazily to avoid bundling it into the main application chunk.
+export async function generateValidationPDF(results){
+  const [{ jsPDF }] = await Promise.all([
+    import('jspdf')
+  ])
+
   const doc = new jsPDF({orientation:'portrait', unit:'pt', format:'a4'})
   const margin = 40
   let y = 40

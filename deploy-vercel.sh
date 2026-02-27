@@ -24,6 +24,6 @@ npm run build
 
 echo "Deploying to Vercel (production)..."
 # --confirm prevents confirmation prompts, --prod makes a production deployment
-npx vercel --prod --confirm --token "$VERCEL_TOKEN"
+npx vercel --prod --yes --token "$VERCEL_TOKEN"
 
 echo "Deployment finished. If the CLI output included a URL, open it to view the production site." 

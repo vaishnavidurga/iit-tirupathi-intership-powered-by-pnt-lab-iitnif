@@ -10,7 +10,8 @@ export default function Login(){
     e.preventDefault()
     const user = {name: name || 'User', email}
     localStorage.setItem('soilUser', JSON.stringify(user))
-    nav('/dashboard')
+    // after login we show the landing/hero content before heading to dashboard
+    nav('/landing')
   }
 
   return (
