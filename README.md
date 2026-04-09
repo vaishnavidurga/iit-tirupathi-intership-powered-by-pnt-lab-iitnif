@@ -38,7 +38,6 @@ A complete internship project that demonstrates my ability to build an end-to-en
 
 - The main branch shows the project overview.
 - The detailed internship project is in `iit-tirupati-pnt-lab-internship-project`.
-- This repository is focused on my own work and technical capabilities.
 
 ---
 
