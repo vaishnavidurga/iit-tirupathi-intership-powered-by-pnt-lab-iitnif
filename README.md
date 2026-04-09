@@ -1,78 +1,85 @@
-# SoilSense — Precision Agriculture Demo
+# Portfolio Projects
 
-This is a client-side demo web application showcasing an IoT-based soil moisture monitoring system with remote sensing validation and irrigation decision support.
+Welcome! This repository contains my professional projects showcasing expertise in **IoT, Geospatial Technologies, Web Development, and Precision Agriculture**.
 
-Features
-- Real-time (simulated) IoT sensor telemetry (soil moisture, temperature, humidity)
-- Interactive map with multiple sensor locations (Leaflet)
-- Mock satellite imagery viewer (Sentinel-1/2 style SVGs)
-- Machine Learning validation metrics (mocked)
-- Irrigation recommendations and water deficit calculations
-- Analytics, CSV export, downloadable validation report stub
-- Responsive, professional UI
+---
 
-Tech
-- React + Vite
-- Leaflet (react-leaflet)
-- Chart.js (react-chartjs-2)
-- PapaParse for CSV export
-- In-browser data simulator (no backend required)
+## Projects
 
-Quick start (macOS / zsh)
+### 🌾 SoilSense — IoT-Based Soil Moisture Monitoring with Remote Sensing Validation
 
-1. Install dependencies
+**Branch:** `iit-tirupati-pnt-lab-internship-project`
 
-```bash
-cd /Users/pavan/Desktop/test
-npm install
+A comprehensive **IoT and geospatial-based soil moisture monitoring system** designed for precision agriculture.
+
+**Key Features:**
+- Real-time environmental data collection (soil moisture, temperature, humidity, light)
+- GPS-based geolocation for every sensor reading
+- Satellite-based remote sensing validation (Sentinel-1, Sentinel-2, ERA5)
+- Automatic irrigation system with threshold-based control
+- Interactive web dashboard for visualization and analytics
+- Water usage analytics and conservation metrics
+
+**Technologies:**
+- **Hardware:** Raspberry Pi, IoT sensors, GPS module, water pump control
+- **Frontend:** React.js, Vite, Leaflet, Chart.js
+- **Backend:** Firebase real-time database
+- **Geospatial:** Google Earth Engine, QGIS, satellite imagery processing
+- **Deployment:** Vercel
+
+**Explore the detailed project:** [View Branch](https://github.com/vaishnavidurga/IIT-Tirupati-PNT-Lab-Internship/tree/iit-tirupati-pnt-lab-internship-project)
+
+---
+
+## Skills Demonstrated
+
+### Technical Stack
+- **IoT & Hardware:** Sensor interfacing, Raspberry Pi, GPIO control, ADC integration
+- **Web Development:** React.js, Vite, JavaScript, CSS3, responsive design
+- **Geospatial Technologies:** Remote sensing, satellite imagery analysis, GPS, mapping
+- **Data Processing:** Real-time data handling, Firebase, CSV export
+- **Cloud Deployment:** Vercel, CI/CD pipelines
+- **Tools:** Git, QGIS, Google Earth Engine, Python, UNIX
+
+### Core Competencies
+- Full-stack IoT system design and implementation
+- Real-time data visualization and dashboard development
+- Geospatial data analysis and remote sensing
+- Problem-solving and system integration
+- Project documentation and technical communication
+
+---
+
+## About
+
+I'm passionate about leveraging technology to solve real-world problems, particularly in precision agriculture and environmental monitoring. My projects focus on integrating multiple technologies—IoT, geospatial analysis, and web platforms—to create scalable, user-centric solutions.
+
+Each project is built from the ground up with attention to architecture, performance, and user experience.
+
+---
+
+## Repository Structure
+
+```
+├── main (this branch)
+│   └── Project listings and overview
+│
+└── iit-tirupati-pnt-lab-internship-project
+    └── Detailed project implementation
+        ├── Frontend (React + Vite)
+        ├── Hardware integration
+        ├── Remote sensing processing
+        └── Complete documentation
 ```
 
-2. Run dev server
+---
 
-```bash
-npm run dev
-```
+## Get Started
 
-3. Open the URL printed by Vite (usually http://localhost:5173)
+Explore each project branch to see detailed implementation, code structure, deployment guides, and technical documentation.
 
-Build for production
+**Featured Project:** [SoilSense - IoT Soil Moisture System](https://github.com/vaishnavidurga/IIT-Tirupati-PNT-Lab-Internship/tree/iit-tirupati-pnt-lab-internship-project)
 
-```bash
-npm run build
-npm run preview
-```
+---
 
-Notes
-- This project is a client-side demo — satellite imagery and ML outputs are synthetically generated for visualization and validation demonstration.
-- To extend: plug APIs for real telemetry, ingest actual satellite tiles (Sentinel Hub / AWS), and replace ML mocks with trained models.
-
-Deploying to Vercel
-
-This repo is ready to deploy to Vercel. Two options:
-
-1) Connect repository to Vercel (recommended)
-	- Push your code to GitHub.
-	- Go to https://vercel.com and create a new project, import the GitHub repository.
-	- Vercel will detect a static build. Set the build command to `npm run build` and the output directory to `dist` (this repo includes `vercel.json` to help).
-
-2) Deploy via GitHub Actions (CI)
-	- The repo contains `.github/workflows/vercel-deploy.yml` which runs on push to `main` or `master`.
-	- Store the following secrets in your GitHub repository settings:
-	  - `VERCEL_TOKEN` — your personal Vercel token
-	  - `VERCEL_ORG_ID` — your Vercel organization ID
-	  - `VERCEL_PROJECT_ID` — the project id in Vercel
-	- After adding secrets, push to `main` to trigger the workflow which will build and deploy with `--prod`.
-
-3) Quick CLI deploy (local)
-	- Install the Vercel CLI and run `vercel --prod` from the repo root.
-
-Notes
- - The GitHub Action uses `amondnet/vercel-action@v20` and expects the above secrets. You can also use the official Vercel action if you prefer.
- - For production telemetry and satellite tiles, configure environment variables in the Vercel project and update the app to read them at runtime.
-
-Files of interest
-- `src/services/simulator.js` — core data generator (sensors, satellite mocks, ML validation, irrigation recs)
-- `src/pages/*` — main pages for dashboard, satellite viewer, validation, irrigation, analytics, docs and about
-- `src/components/MapView.jsx` — Leaflet map wrapper
-
-License: MIT (demo)
+*Last Updated: April 2026*
