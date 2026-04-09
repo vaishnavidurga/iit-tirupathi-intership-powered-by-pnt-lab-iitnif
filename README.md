@@ -10,8 +10,6 @@ This branch is the portfolio overview. Below are the projects, starting with my 
 
 **Branch:** `iit-tirupati-pnt-lab-internship-project`
 
-A complete internship project that demonstrates my ability to build an end-to-end IoT and geospatial solution for precision agriculture.
-
 **What’s included:**
 - IoT sensor integration with Raspberry Pi
 - GPS-based field data collection
