@@ -1,18 +1,26 @@
-Overview
-This project presents a comprehensive IoT and geospatial-based soil moisture monitoring system designed for precision agriculture. The system integrates:
+# SoilSense — IoT Soil Moisture Monitoring with Remote Sensing
 
-Hardware IoT sensors deployed in the field (Raspberry Pi + environmental sensors)
-GPS-based geolocation for every soil moisture reading
-Satellite-based remote sensing validation using Sentinel-1, Sentinel-2, and ERA5 data
-Web-based interactive dashboard for real-time data visualization and irrigation decision support
+## 📋 Overview
+
+This project presents a comprehensive **IoT and geospatial-based soil moisture monitoring system** designed for precision agriculture. The system integrates:
+
+### 🔧 Core Technologies
+- **Hardware IoT sensors** deployed in the field (Raspberry Pi + environmental sensors)
+- **GPS-based geolocation** for every soil moisture reading
+- **Satellite-based remote sensing validation** using Sentinel-1, Sentinel-2, and ERA5 data
+- **Web-based interactive dashboard** for real-time data visualization and irrigation decision support
+
+### 🎯 Project Impact
 The project successfully demonstrates how field-level IoT data combined with satellite-based remote sensing indices can improve accuracy in identifying dry and wet zones, enabling data-driven irrigation management for farmers.
 
-Problem Statement
-Traditional irrigation methods lead to water wastage and inefficient resource management. By combining:
+## 🚨 Problem Statement
 
-Ground truth data from IoT sensors
-Satellite remote sensing indices (NDWI, SAR backscatter)
-Geospatial visualization
+Traditional irrigation methods lead to **water wastage and inefficient resource management**. By combining:
+
+- **Ground truth data** from IoT sensors
+- **Satellite remote sensing indices** (NDWI, SAR backscatter)
+- **Geospatial visualization**
+
 We provide an integrated platform for farmers and water resource managers to make informed irrigation decisions.
 
 Project Components
