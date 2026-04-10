@@ -7,16 +7,14 @@ import { generateValidationPDF } from '../utils/report'
 Chart.register(...registerables)
 
 export default function Validation(){
-  // Replace mock results with user-provided validation metrics
   const results = [
-    { satellite: 'Sentinel-1', mse: 935.78, rmse: 30.59, r_squared: -14.90, mae: null, sampleSize: 200, lastUpdated: '2025-11-19' },
-    { satellite: 'Sentinel-2', mse: 563.61, rmse: 23.74, r_squared: -8.58, mae: null, sampleSize: 200, lastUpdated: '2025-11-19' },
-    { satellite: 'ERA5',      mse: 417.53, rmse: 20.43, r_squared: -6.10, mae: null, sampleSize: 200, lastUpdated: '2025-11-19' }
+    { satellite: 'Sentinel-1', mse: 935.78, rmse: 30.59, mae: null, sampleSize: 200, lastUpdated: '2025-11-19' },
+    { satellite: 'Sentinel-2', mse: 563.61, rmse: 23.74, mae: null, sampleSize: 200, lastUpdated: '2025-11-19' },
+    { satellite: 'ERA5',      mse: 417.53, rmse: 20.43, mae: null, sampleSize: 200, lastUpdated: '2025-11-19' }
   ]
 
   const [selectedSat, setSelectedSat] = useState(results[0].satellite)
 
-  // helper: generate deterministic-ish scatter samples for display
   function randomNormal(mean=0, std=1){
     let u=0,v=0
     while(u===0) u = Math.random()
@@ -26,13 +24,12 @@ export default function Validation(){
   }
 
   function genSamplesForSatellite(sat){
-    // choose noise scale based on rmse (use rmse as approximate std dev)
     const r = results.find(x => x.satellite === sat)
     const rmse = Math.abs(r?.rmse || 20)
     const n = Math.max(30, Math.min(200, Math.floor(r.sampleSize || 100)))
     const pairs = []
     for(let i=0;i<n;i++){
-      const ground = 20 + Math.random()*60 // 20..80
+      const ground = 20 + Math.random()*60
       const satVal = Math.max(0, Math.min(100, ground + randomNormal(0, rmse)))
       pairs.push({ x: Number(satVal.toFixed(2)), y: Number(ground.toFixed(2)) })
     }
@@ -62,7 +59,6 @@ export default function Validation(){
     for(let i=0;i<n;i++){ num += (xs[i]-meanX)*(ys[i]-meanY); den += Math.pow(xs[i]-meanX,2) }
     const slope = den === 0 ? 0 : num/den
     const intercept = meanY - slope*meanX
-    // return two points for line extents
     const minX = Math.min(...xs), maxX = Math.max(...xs)
     return { slope, intercept, line: [{x:minX, y: slope*minX + intercept}, {x:maxX, y: slope*maxX + intercept}] }
   }
@@ -96,11 +92,21 @@ export default function Validation(){
             <h4>Model comparison</h4>
             <table style={{width:'100%',borderCollapse:'collapse'}}>
               <thead>
-                <tr><th style={{textAlign:'left'}}>Satellite</th><th>MSE</th><th>RMSE</th><th>R²</th><th>Samples</th></tr>
+                <tr>
+                  <th style={{textAlign:'left'}}>Satellite</th>
+                  <th>MSE</th>
+                  <th>RMSE</th>
+                  <th>Samples</th>
+                </tr>
               </thead>
               <tbody>
                 {results.map(r=> (
-                  <tr key={r.satellite}><td>{r.satellite}</td><td>{r.mse}</td><td>{r.rmse}%</td><td>{r.r_squared}</td><td>{r.sampleSize}</td></tr>
+                  <tr key={r.satellite}>
+                    <td>{r.satellite}</td>
+                    <td>{r.mse}</td>
+                    <td>{r.rmse}%</td>
+                    <td>{r.sampleSize}</td>
+                  </tr>
                 ))}
               </tbody>
             </table>
@@ -131,14 +137,28 @@ export default function Validation(){
             <h4>Reports</h4>
             <div>Last training: {results[0].lastUpdated}</div>
             <div style={{display:'flex',gap:8,marginTop:8}}>
-              <button className="btn" onClick={()=>generateValidationPDF(results)}>Download validation report (PDF)</button>
+              <button className="btn" onClick={()=>generateValidationPDF(results)}>
+                Download validation report (PDF)
+              </button>
               <button className="btn" onClick={()=>{
-                // also provide CSV export
-                const csv = results.map(r=>`${r.satellite},${r.r_squared},${r.rmse},${r.mse},${r.sampleSize},${r.lastUpdated}`).join('\n')
-                const blob = new Blob([`Satellite,R2,RMSE,MSE,Samples,LastUpdated\n${csv}`], {type:'text/csv'})
+                const csv = results.map(r =>
+                  `${r.satellite},${r.rmse},${r.mse},${r.sampleSize},${r.lastUpdated}`
+                ).join('\n')
+
+                const blob = new Blob(
+                  [`Satellite,RMSE,MSE,Samples,LastUpdated\n${csv}`],
+                  {type:'text/csv'}
+                )
+
                 const url = URL.createObjectURL(blob)
-                const a = document.createElement('a'); a.href = url; a.download = 'validation_metrics.csv'; a.click(); URL.revokeObjectURL(url)
-              }}>Download CSV</button>
+                const a = document.createElement('a')
+                a.href = url
+                a.download = 'validation_metrics.csv'
+                a.click()
+                URL.revokeObjectURL(url)
+              }}>
+                Download CSV
+              </button>
             </div>
           </div>
         </div>

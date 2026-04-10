@@ -6,11 +6,12 @@ function rand(min, max){ return Math.random()*(max-min)+min }
 const sensorsTemplate = [
   // Cluster sensors around a green garden area near VR Siddhartha Engineering College
   // Approx campus center: 16.5175, 80.6325 (Kanuru, Vijayawada 520007)
-  // Offsets are small so markers cluster visually on the garden area
-  { sensorId: 'SENS_001', fieldName: 'FIELD A- North', location: { lat: 16.5190, lon: 80.6330 } },
-  { sensorId: 'SENS_002', fieldName: 'FIELD B - South', location: { lat: 16.5160, lon: 80.6320 } },
-  { sensorId: 'SENS_003', fieldName: 'FIELD C - East',  location: { lat: 16.5178, lon: 80.6340 } },
-  { sensorId: 'SENS_004', fieldName: 'FIELD D - West',  location: { lat: 16.5172, lon: 80.6310 } }
+  // Offsets are small so markers cluster visually on the garden area16.47985238737308, 80.69250063294189
+  //16.479676425539687, 80.69263802286746  16.479808275131045, 80.69229748336345    16.479562035124893, 80.69328432798501
+  { sensorId: 'SENS_001', fieldName: 'FIELD A- North', location: { lat: 16.47985238737308, lon: 80.69250063294189 } },
+  { sensorId: 'SENS_002', fieldName: 'FIELD B - South', location: { lat: 16.479676425539687, lon: 80.69263802286746  } },
+  { sensorId: 'SENS_003', fieldName: 'FIELD C - East',  location: { lat: 16.479808275131045, lon: 80.69229748336345 } },
+  { sensorId: 'SENS_004', fieldName: 'FIELD D - West',  location: { lat:16.479562035124893, lon: 80.69328432798501 } }
 ]
 
 // generate initial time-series for last 30 days, per 15-min interval (but we'll sample fewer points to keep data small)
