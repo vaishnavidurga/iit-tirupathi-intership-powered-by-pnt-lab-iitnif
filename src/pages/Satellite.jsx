@@ -110,7 +110,18 @@ export default function Satellite() {
           <h3>
             {sat} — {date}
           </h3>
-          <div dangerouslySetInnerHTML={{ __html: mock.svg }} />
+          <svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" role="img" aria-label="Satellite mock">
+            <rect width="100%" height="100%" fill={mock.svgModel.bgColor} />
+            <text x="20" y="40" fontSize="18" fill="#2C3E50">
+              {mock.svgModel.title}
+            </text>
+            <text x="20" y="70" fontSize="14" fill="#2C3E50">
+              {mock.svgModel.ndwiText}
+            </text>
+            <text x="20" y="94" fontSize="14" fill="#2C3E50">
+              {mock.svgModel.moistureText}
+            </text>
+          </svg>
         </div>
 
         <div>

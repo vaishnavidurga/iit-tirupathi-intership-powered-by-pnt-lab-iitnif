@@ -111,11 +111,17 @@ export default {
     return dates
   },
   getSatelliteMock({sat='Sentinel-2', date=null}){
-    // returns metadata and a tiny svg string we can render inline
+    // returns metadata and a tiny svg model we can render safely with React
     const ndwiMean = Number((45 + Math.random()*30).toFixed(1))
     const moistureEst = Number((30 + Math.random()*30).toFixed(1))
-    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='100%' height='100%' fill='${sat.includes('1')? '#b2dfdb':'#c8e6c9'}'/><text x='20' y='40' font-size='18' fill='#2C3E50'>${sat} — ${date||new Date().toISOString().slice(0,10)}</text><text x='20' y='70' font-size='14' fill='#2C3E50'>NDWI mean: ${ndwiMean}%</text><text x='20' y='94' font-size='14' fill='#2C3E50'>Soil moisture est: ${moistureEst}%</text></svg>`
-    return { satellite: sat, date: date||new Date().toISOString().slice(0,10), ndwiMean, moistureEst, svg }
+    const resolvedDate = date||new Date().toISOString().slice(0,10)
+    const svgModel = {
+      bgColor: sat.includes('1') ? '#b2dfdb' : '#c8e6c9',
+      title: `${sat} — ${resolvedDate}`,
+      ndwiText: `NDWI mean: ${ndwiMean}%`,
+      moistureText: `Soil moisture est: ${moistureEst}%`
+    }
+    return { satellite: sat, date: resolvedDate, ndwiMean, moistureEst, svgModel }
   },
   // ML validation mock
   getMLValidation(){
